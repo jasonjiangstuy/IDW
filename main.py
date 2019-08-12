@@ -172,7 +172,6 @@ class playBasic(webapp2.RequestHandler):
 
 
     def post(self):
-        user_astro_sign = self.request.get('/') #change
         template = jinja_current_directory.get_template('/templates/IDW.html')
         t = playmove(player11, player22, hold1, hold2)
     #    if t == 11:

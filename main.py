@@ -157,7 +157,7 @@ jinja_current_directory = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-    
+
 game = startgamebasic()
 player11, player22 = setmoves(game)
 hold1 = []
@@ -165,18 +165,21 @@ hold2 = []
 moves = []
 class playBasic(webapp2.RequestHandler):
     def get(self):
-        template = jinja_current_directory.get_template('///')#play template
+        template = jinja_current_directory.get_template('/templates/IDW.html')#play template
+        self.response.write(template.render())
 
 
 
 
     def post(self):
-        user_astro_sign = self.request.get('user_astrological_sign') #change
-        template = jinja_current_directory.get_template('///')
+        user_astro_sign = self.request.get('/') #change
+        template = jinja_current_directory.get_template('/templates/IDW.html')
         t = playmove(player11, player22, hold1, hold2)
-        if t == 11:
-            template = jinja_current_directory.get_template('///')
-
+    #    if t == 11:
+    #        template = jinja_current_directory.get_template('///')
+    #    if t == 22:
+    #        template = jinja_current_directory.get_template('///')
+        replaces={"moves", moves}
         message = get_fortune()
         replaces = {"title" : user_astro_sign, "message" : message}
         self.response.write(template.render(replaces))

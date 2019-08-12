@@ -5,7 +5,7 @@ import random
 import jinja2
 
 
-def startgame():
+def startgamebasic():
     myDictBasic = {
     "A" : 'r', "A" : 'r', "A":'b', "A" : 'b',
     2: 'r' , 1: 'r' , 1:'b', 1 : 'b',
@@ -40,13 +40,98 @@ def setmoves(database):
         y +=1
 
     return player1q, player2q
-
-def playmove(player1q, player2q):
+#run per move
+def playmove(player1q, player2q, hold1, hold2):
+    if len(player1q) < 1:
+        if bringin(player1q, player2q, hold1, hold2, 1, 3) == 11:
+            return(11)
+    if len(player2q) < 1:
+        if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
+            return(22)
     play1 = player1q[0]
     player1q.pop[0]
     play2 = player2q[0]
     player2q.pop[0]
-    
+
+    if play1 > play2:
+        hold1.append(play1)
+        hold1.append(play2)
+        moves[]
+    elif play2 > play1:
+        hold2.append(play1)
+        hold2.append(play2)
+        return 'moves',play1, play2
+    elif play2 == play1:
+        stake = [play1, play2]
+        y = war(player1q, player2q, hold1, hold2, stake)
+        if y = 1:
+            return 11
+        if y = 2:
+            return 22
+
+    else: raise NameError('Function: playmove broken')
+
+def war(player1q, player2q, hold1, hold2, stake):
+    if len(player1q) < 3:
+        if bringin(player1q, player2q, hold1, hold2, 1, 3) == 11:
+            return(11)
+    if len(player2q) < 3:
+        if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
+            return(22)
+    war1= ()
+    war2 = ()
+
+
+    war1 = (player1q[0], player1q[1], player1q[2])
+    war2 = (player2q[0], player2q[1], player2q[2])
+    player1q.pop[0]
+    player1q.pop[1]
+    player1q.pop[2]
+    player2q.pop[0]
+    player2q.pop[1]
+    player2q.pop[2]
+
+    if war1[-1] > war2[-1]:
+        for i in war1:
+            hold1.append(i)
+        for i in war2:
+            hold1.append(i)
+        for i in stake:
+            hold1.append(i)
+
+
+    if war2[-1] > war1[-1]:
+        for i in war1:
+            hold2.append(i)
+        for i in war2:
+            hold2.append(i)
+        for i in stake:
+            hold2.append(i)
+
+    if war2[-1] == war1[-1]:
+
+        for i in war1:
+            stake.append(i)
+        for i in war2:
+            stake.append(i)
+        war(player1q, player2q, hold1, hold2, stake)
+
+
+def bringin(player1q, player2q,hold1 , hold2, player, need):
+    if player == 1:
+        if hold1 < need:
+            return(11)
+        else:
+            for i in hold1:
+                player1q.append(i)
+    elif player == 2:
+        if hold2 < need:
+            return(22)
+        else:
+            for i in hold2:
+                player2q.append(i)
+    else: raise NameError('in BringIn: player var is wrong')
+
 
 
 
@@ -56,19 +141,25 @@ jinja_current_directory = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-
+game = startgamebasic()
+player11, player22 = setmoves(game)
+hold1 = []
+hold2 = []
+moves = []
 class playBasic(webapp2.RequestHandler):
     def get(self):
-        # In part 2, instead of returning this string,
-        # make a function call that returns a random fortune.
-        template = jinja_current_directory.get_template('templates/fortune-results.html')
-        replace = {"title" : "What is your Astrological Sign", "message" : ""}
-        self.response.write(template.render(replace))
+        template = jinja_current_directory.get_template('///')#play template
+
+
+
 
     def post(self):
-        user_astro_sign = self.request.get('user_astrological_sign')
-
+        user_astro_sign = self.request.get('user_astrological_sign') #change
         template = jinja_current_directory.get_template('templates/fortune-results.html')
+        playmove(player11, player22, hold1, hold2)
+        if  == 11:
+            template = jinja_current_directory.get_template('///')
+
         message = get_fortune()
         replaces = {"title" : user_astro_sign, "message" : message}
         self.response.write(template.render(replaces))
@@ -83,9 +174,6 @@ class Main(webapp2.RequestHandler):
         self.response.write(template.render())
 
 
-class GoodbyeHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('My response is Goodbye world')
 # Route mapping
 app = webapp2.WSGIApplication([
     # This line routes the main url ('/')  - also know as

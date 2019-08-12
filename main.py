@@ -5,6 +5,26 @@ import random
 import jinja2
 
 
+temp = []
+temp1 = []
+hold1 = []
+hold2 = []
+moves = []
+
+def bringin(player1q, player2q,hold1 , hold2, player, need):
+    if player == 1:
+        if hold1 < need:
+            return(11)
+        else:
+            for i in hold1:
+                player1q.append(i)
+    elif player == 2:
+        if hold2 < need:
+            return(22)
+        else:
+            for i in hold2:
+                player2q.append(i)
+    else: raise NameError('in BringIn: player var is wrong')
 def startgamebasic():
     myDictBasic = {
     "A" : 'r', "A" : 'r', "A":'b', "A" : 'b',
@@ -49,21 +69,21 @@ def playmove(player1q, player2q, hold1, hold2):
         if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
             return(22)
     play1 = player1q[0]
-    player1q.pop[0]
+    player1q.pop(0)
     play2 = player2q[0]
-    player2q.pop[0]
+    player2q.pop(0)
 
     if play1 > play2:
         hold1.append(play1)
         hold1.append(play2)
-        move.append((play1))
-        move.append((play2))
+        moves.append((play1))
+        moves.append((play2))
         return
     elif play2 > play1:
         hold2.append(play1)
         hold2.append(play2)
-        move.append((play1))
-        move.append((play2))
+        moves.append((play1))
+        moves.append((play2))
         return
 
     elif play2 == play1:
@@ -131,22 +151,8 @@ def war(player1q, player2q, hold1, hold2, stake):
         war(player1q, player2q, hold1, hold2, stake)
         return
 
-temp = []
-temp1 = []
-def bringin(player1q, player2q,hold1 , hold2, player, need):
-    if player == 1:
-        if hold1 < need:
-            return(11)
-        else:
-            for i in hold1:
-                player1q.append(i)
-    elif player == 2:
-        if hold2 < need:
-            return(22)
-        else:
-            for i in hold2:
-                player2q.append(i)
-    else: raise NameError('in BringIn: player var is wrong')
+game = startgamebasic()
+player11, player22 = setmoves(game)
 
 
 
@@ -158,11 +164,7 @@ jinja_current_directory = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-game = startgamebasic()
-player11, player22 = setmoves(game)
-hold1 = []
-hold2 = []
-moves = []
+
 class playBasic(webapp2.RequestHandler):
     def get(self):
         template = jinja_current_directory.get_template('/templates/IDW.html')#play template
@@ -178,9 +180,7 @@ class playBasic(webapp2.RequestHandler):
     #        template = jinja_current_directory.get_template('///')
     #    if t == 22:
     #        template = jinja_current_directory.get_template('///')
-        replaces={"moves", moves}
-        message = get_fortune()
-        replaces = {"title" : user_astro_sign, "message" : message}
+        replaces={"moves": moves}
         self.response.write(template.render(replaces))
 
 

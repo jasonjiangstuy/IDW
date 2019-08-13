@@ -27,23 +27,45 @@ moves = []
 player1q = []
 player2q = []
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
-    if player == 1:
-        if len(hold1) < need:
-            return(11)
-        else:
-            for i in hold1:
-                player1q.append(i)
-            for i in range(len(hold1)):
-                hold1.pop()
-    elif player == 2:
-        if len(hold2) < need:
-            return(22)
-        else:
-            for i in hold2:
-                player2q.append(i)
-            for i in range(len(hold2)):
-                hold2.pop()
-    else: raise NameError('in BringIn: player var is wrong')
+    if game == 1:
+
+        if player == 1:
+            if len(hold1) < need:
+                return(11)
+            else:
+                for i in hold1:
+                    player1q.append(i)
+                    for i in range(len(hold1)):
+                        hold1.pop()
+        elif player == 2:
+            if len(hold2) < need:
+                return(22)
+            else:
+                for i in hold2:
+                    player2q.append(i)
+                for i in range(len(hold2)):
+                    hold2.pop()
+        else: raise NameError('in BringIn: player var is wrong')
+
+        if game == 2:
+
+            if player == 1:
+                if len(hold1) < need:
+                    return('stop')
+                else:
+                    for i in hold1:
+                        player1q.append(i)
+                        for i in range(len(hold1)):
+                            hold1.pop()
+            elif player == 2:
+                if len(hold2) < need:
+                    return('stop')
+                else:
+                    for i in hold2:
+                        player2q.append(i)
+                    for i in range(len(hold2)):
+                        hold2.pop()
+            else: raise NameError('in BringIn: player var is wrong')
 
 def setmoves(database):
     p =0
@@ -61,7 +83,6 @@ def setmoves(database):
 #run per move
 def playmove(player1q, player2q, hold1, hold2, game):
     if game == 1:
-
         if len(player1q) < 1:
             if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
                 return(11)
@@ -293,11 +314,11 @@ class playShort(webapp2.RequestHandler):
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW.html')
-        t = playmove(player1q, player2q, hold1, hold2, 1)
+        t = playmove(player1q, player2q, hold1, hold2, 2)
     #    if t == 11:
     #        template = jinja_current_directory.get_template('///')
         lost = " "
-        if t == 'end':
+        if t == 'stop':
             if hold2 > hold1:
                 lost = "player1 wins"
             if hold2 < hold1:

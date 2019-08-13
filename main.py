@@ -5,7 +5,7 @@ import random
 import jinja2
 
 myDictBasic = [
-    ("A",'r'), ("A" , 'r'), ("A",'b'), ("A" , 'b'),
+    (1,'r'), (1 , 'r'), (1,'b'), (1, 'b'),
     (2, 'r') , (2, 'r') , (2,'b'), (2 , 'b'),
     (3, 'r') , (3, 'r') , (3,'b'),(3 , 'b'),
     (4, 'r') , (4, 'r') , (4,'b'), (4 , 'b'),
@@ -28,17 +28,21 @@ player1q = []
 player2q = []
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     if player == 1:
-        if hold1 < need:
+        if len(hold1) < need:
             return(11)
         else:
             for i in hold1:
-                player1q.append(i[0])
+                player1q.append(i)
+            for i in range(len(hold1)):
+                hold1.pop()
     elif player == 2:
-        if hold2 < need:
+        if len(hold2) < need:
             return(22)
         else:
             for i in hold2:
-                player2q.append(i[0])
+                player2q.append(i)
+            for i in range(len(hold2)):
+                hold2.pop()
     else: raise NameError('in BringIn: player var is wrong')
 
 def setmoves(database):
@@ -64,9 +68,9 @@ def playmove(player1q, player2q, hold1, hold2, game):
         if len(player2q) < 1:
             if bringin(player1q, player2q, hold1, hold2, 2, 3, game) == 22:
                 return(22)
-        play1 = player1q[0][0]
+        play1 = player1q[0]
         player1q.pop(0)
-        play2 = player2q[0][0]
+        play2 = player2q[0]
         player2q.pop(0)
 
         if play1 > play2:
@@ -128,10 +132,10 @@ def playmove(player1q, player2q, hold1, hold2, game):
 def war(player1q, player2q, hold1, hold2, stake, game):
     if game == 1:
         if len(player1q) < 3:
-            if bringin(player1q, player2q, hold1, hold2, 1, 3) == 11:
+            if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
                 return(11)
         if len(player2q) < 3:
-            if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
+            if bringin(player1q, player2q, hold1, hold2, 2, 3, game) == 22:
                 return(22)
         war1= ()
         war2 = ()
@@ -139,17 +143,18 @@ def war(player1q, player2q, hold1, hold2, stake, game):
 
         war1 = (player1q[0], player1q[1], player1q[2][0])
         war2 = (player2q[0], player2q[1], player2q[2][0])
-        player1q.pop[0]
-        player1q.pop[1]
-        player1q.pop[2]
-        player2q.pop[0]
-        player2q.pop[1]
-        player2q.pop[2]
+        player1q.pop(0)
+        player1q.pop(1)
+        player1q.pop(2)
+        player2q.pop(0)
+        player2q.pop(1)
+        player2q.pop(2)
 
         if war1[-1] > war2[-1]:
             for i in war1:
                 hold1.append(i)
                 temp.append(i)
+
             for i in war2:
                 hold1.append(i)
                 temp1.append(i)
@@ -176,6 +181,7 @@ def war(player1q, player2q, hold1, hold2, stake, game):
                 stake.append(i)
                 temp1.append(i)
 
+
             war(player1q, player2q, hold1, hold2, stake)
             return
 
@@ -191,12 +197,12 @@ def war(player1q, player2q, hold1, hold2, stake, game):
 
         war1 = (player1q[0], player1q[1], player1q[2][0])
         war2 = (player2q[0], player2q[1], player2q[2][0])
-        player1q.pop[0]
-        player1q.pop[1]
-        player1q.pop[2]
-        player2q.pop[0]
-        player2q.pop[1]
-        player2q.pop[2]
+        player1q.pop(0)
+        player1q.pop(1)
+        player1q.pop(2)
+        player2q.pop(0)
+        player2q.pop(1)
+        player2q.pop(2)
 
         if war1[-1] > war2[-1]:
             for i in war1:
@@ -255,9 +261,10 @@ class playBasic(webapp2.RequestHandler):
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW.html')
-        if lost == ""
-            t = playmove(player1q, player2q, hold1, hold2, 1)
         lost = ""
+        if lost == "":
+            t = playmove(player1q, player2q, hold1, hold2, 1)
+
         if t == 11:
             lost = "player1"
         if t == 22:
@@ -267,7 +274,7 @@ class playBasic(webapp2.RequestHandler):
         holding1 = len(hold1)
         holding2 = len(hold2)
         test = myDictBasic
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost", lost}
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost}
         self.response.write(template.render(replaces))
 
 

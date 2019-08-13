@@ -59,10 +59,10 @@ def playmove(player1q, player2q, hold1, hold2, game):
     if game == 1:
 
         if len(player1q) < 1:
-            if bringin(player1q, player2q, hold1, hold2, 1, 3) == 11:
+            if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
                 return(11)
         if len(player2q) < 1:
-            if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
+            if bringin(player1q, player2q, hold1, hold2, 2, 3, game) == 22:
                 return(22)
         play1 = player1q[0][0]
         player1q.pop(0)

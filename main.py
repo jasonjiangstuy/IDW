@@ -255,17 +255,19 @@ class playBasic(webapp2.RequestHandler):
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW.html')
-        t = playmove(player1q, player2q, hold1, hold2, 1)
-    #    if t == 11:
-    #        template = jinja_current_directory.get_template('///')
-    #    if t == 22:
-    #        template = jinja_current_directory.get_template('///')
+        if lost == ""
+            t = playmove(player1q, player2q, hold1, hold2, 1)
+        lost = ""
+        if t == 11:
+            lost = "player1"
+        if t == 22:
+            lost = "player2"
         deck1 = len(player1q)
         deck2 = len(player2q)
         holding1 = len(hold1)
         holding2 = len(hold2)
         test = myDictBasic
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test}
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost", lost}
         self.response.write(template.render(replaces))
 
 

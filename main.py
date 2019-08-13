@@ -4,20 +4,20 @@ import os
 import random
 import jinja2
 
-myDictBasic = {
-    1:("A",'r'), 14:("A" , 'r'), 27:("A",'b'), 40:("A" , 'b'),
-    2:(2, 'r') , 15:(2, 'r') , 28:(2,'b'), 41:(2 , 'b'),
-    3:(3, 'r') , 16:(3, 'r') , 29:(3,'b'),42:(3 , 'b'),
-    4:(4, 'r') , 17:(4, 'r') , 30:(4,'b'), 43:(4 , 'b'),
-    5:(5, 'r') ,18:( 5, 'r' ), 31:(5,'b'), 44:(5 , 'b'),
-    6:(6, 'r') , 19:(6, 'r') , 32:(6,'b'),45:( 6 , 'b'),
-    7:(7, 'r') , 20:(7, 'r') ,33:( 7,'b'), 46:(7 , 'b'),
-    8:(8, 'r') ,21:(8, 'r') ,34:( 8,'b'), 47:(8 , 'b'),
-    9:(9, 'r') , 22:(9, 'r') , 35:(9,'b'), 48:(9 , 'b'),
-    10:(10, 'r') ,23 :(10, 'r'), 36:(10,'b'), 49:(10 , 'b'),
-    11:(11, 'r') ,24: (11,'r') , 37:(11,'b'), 50:(11 ,'b'),
-    12:(12, 'r') , 25:(12, 'r' ),38: (12,'b'), 51:(12 , 'b'),
-    13:(13, 'r') , 26:(13, 'r') , 39:(13,'b'), 52:(13 , 'b')}
+myDictBasic = [
+    ("A",'r'), ("A" , 'r'), ("A",'b'), ("A" , 'b'),
+    (2, 'r') , (2, 'r') , (2,'b'), (2 , 'b'),
+    (3, 'r') , (3, 'r') , (3,'b'),(3 , 'b'),
+    (4, 'r') , (4, 'r') , (4,'b'), (4 , 'b'),
+    (5, 'r') ,( 5, 'r' ), (5,'b'), (5 , 'b'),
+    (6, 'r') , (6, 'r') , (6,'b'),( 6 , 'b'),
+    (7, 'r') , (7, 'r') ,( 7,'b'), (7 , 'b'),
+    (8, 'r') ,(8, 'r') ,( 8,'b'), (8 , 'b'),
+    (9, 'r') , (9, 'r') , (9,'b'), (9 , 'b'),
+    (10, 'r') ,(10, 'r'), (10,'b'), (10 , 'b'),
+    (11, 'r') ,(11,'r') , (11,'b'), (11 ,'b'),
+    (12, 'r') , (12, 'r' ), (12,'b'), (12 , 'b'),
+    (13, 'r') , (13, 'r') , (13,'b'), (13 , 'b')]
 
 temp = []
 temp1 = []
@@ -42,15 +42,14 @@ def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     else: raise NameError('in BringIn: player var is wrong')
 
 def setmoves(database):
-
     p =0
+    random.shuffle(database)
     for i in database:
         if p % 2 == 0:
-
-            player1q.append(database[i])
+            player1q.append(i)
 
         if p % 2 == 1 :
-            player2q.append(database[i])
+            player2q.append(i)
         #else: raise NameError('Function: setmoves broken')
         p +=1
 
@@ -60,10 +59,10 @@ def playmove(player1q, player2q, hold1, hold2, game):
     if game == 1:
 
         if len(player1q) < 1:
-            if bringin(player1q, player2q, hold1, hold2, 1, 3) == 11:
+            if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
                 return(11)
         if len(player2q) < 1:
-            if bringin(player1q, player2q, hold1, hold2, 2, 3) == 22:
+            if bringin(player1q, player2q, hold1, hold2, 2, 3, game) == 22:
                 return(22)
         play1 = player1q[0][0]
         player1q.pop(0)

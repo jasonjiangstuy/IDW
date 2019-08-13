@@ -26,6 +26,7 @@ hold2 = []
 moves = []
 player1q = []
 player2q = []
+
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     if game == 1:
 

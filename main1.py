@@ -328,7 +328,7 @@ class playShort(webapp2.RequestHandler):
                 lost = "player2 wins"
             if hold2 == hold1:
                 lost = "tie"
-
+#copy to simple --basic
         deck1 = len(player1q)
         deck2 = len(player2q)
         holding1 = len(hold1)
@@ -336,8 +336,11 @@ class playShort(webapp2.RequestHandler):
         test = myDictBasic
         player1move = moves[len(moves)-2]
         player2move = moves[-1]
-#        img =
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0]}
+        img1 = "no"
+        img2 = "no"
+        img1 = player2move[1] + '.png'
+        img2 = player2move[1]+'.png'
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
         self.response.write(template.render(replaces))
 
 

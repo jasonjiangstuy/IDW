@@ -295,7 +295,10 @@ class playBasic(webapp2.RequestHandler):
         holding1 = len(hold1)
         holding2 = len(hold2)
         test = myDictBasic
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost}
+        player1move = moves[len(moves)-2]
+        player2move = moves[-1]
+
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move, "p2move":player2move}
         self.response.write(template.render(replaces))
 
 
@@ -309,14 +312,15 @@ class Main(webapp2.RequestHandler):
 
 class playShort(webapp2.RequestHandler):
     def get(self):
-        template = jinja_current_directory.get_template('/templates/IDW.html')#play template
+        template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
         self.response.write(template.render())
 
     def post(self):
-        template = jinja_current_directory.get_template('/templates/IDW.html')
+        template = jinja_current_directory.get_template('/templates/IDW2.html')
         t = playmove(player1q, player2q, hold1, hold2, 2)
     #    if t == 11:
     #        template = jinja_current_directory.get_template('///')
+
         lost = " "
         if t == 'stop':
             if hold2 > hold1:
@@ -331,7 +335,10 @@ class playShort(webapp2.RequestHandler):
         holding1 = len(hold1)
         holding2 = len(hold2)
         test = myDictBasic
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost":lost}
+        player1move = moves[len(moves)-2]
+        player2move = moves[-1]
+
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move, "p2move":player2move}
         self.response.write(template.render(replaces))
 
 

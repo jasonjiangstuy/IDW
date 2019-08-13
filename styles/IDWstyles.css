@@ -1,5 +1,7 @@
 body {
   background-color: green;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 h1 {
@@ -13,4 +15,8 @@ h3 {
 #Rules {
   color: white;
   font-size: 20px;
+}
+
+td {
+  margin: 10px;
 }

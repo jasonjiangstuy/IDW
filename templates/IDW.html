@@ -4,22 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Game</title>
-  <link rel="stylesheet" type="text/css" href="/styles/IDWstyles.css" />
+  <title>Shortened Game</title>
+  <link rel="stylesheet" type="text/css" href="/styles/IDWstyles.css">
   </head>
-<body>
-    <h1>I Declare War!</h1>
-test: {{test}}
-<br><br>
-{{moves}}
-<br>
-player 1 cards left :{{player1}}, hold pile:{{player1hold}}
-<br>
-player 2 cards left :{{player2}}, hold pile:{{player2hold}}
-<br>
-{{lost}}
-  <form method="post">
-  <input type="submit">Play Move</input>
-  </form>
-</body>
+  <body><center>
+        <h1>I Declare War!</h1>
+
+    <br><br>
+
+
+  <table>
+    <tr>
+      <th>
+        player1
+      </th>
+      <th>
+        player2
+      </th>
+    </tr>
+    <tr>
+          <td>
+            player 1 cards left :{{player1}}
+          </td>
+
+          <td>
+            player 2 cards left :{{player2}}
+          </td>
+    </tr>
+    <tr>
+        <td>
+          hold pile:{{player1hold}}
+        </td>
+        <td>
+          hold pile: {{player2hold}}
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+          Current move: {{p1move}}
+        </td>
+        <td>
+          Current move: {{p2move}}
+        </td>
+    </tr>
+</table><br>
+    {{lost}}<br><hr>
+
+
+      <form method="post">
+        <input type="submit">Play Move</input>
+
+      </form>
+      <hr><br>
+
+
+          test: {{test}}<br><br>
+
+    {{moves}}
+</center>
+  </body>
+
+
 </html>

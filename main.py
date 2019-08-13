@@ -5,19 +5,19 @@ import random
 import jinja2
 
 myDictBasic = [
-    (1,'r'), (1 , 'r'), (1,'b'), (1, 'b'),
-    (2, 'r') , (2, 'r') , (2,'b'), (2 , 'b'),
-    (3, 'r') , (3, 'r') , (3,'b'),(3 , 'b'),
-    (4, 'r') , (4, 'r') , (4,'b'), (4 , 'b'),
-    (5, 'r') ,( 5, 'r' ), (5,'b'), (5 , 'b'),
-    (6, 'r') , (6, 'r') , (6,'b'),( 6 , 'b'),
-    (7, 'r') , (7, 'r') ,( 7,'b'), (7 , 'b'),
-    (8, 'r') ,(8, 'r') ,( 8,'b'), (8 , 'b'),
-    (9, 'r') , (9, 'r') , (9,'b'), (9 , 'b'),
-    (10, 'r') ,(10, 'r'), (10,'b'), (10 , 'b'),
-    (11, 'r') ,(11,'r') , (11,'b'), (11 ,'b'),
-    (12, 'r') , (12, 'r' ), (12,'b'), (12 , 'b'),
-    (13, 'r') , (13, 'r') , (13,'b'), (13 , 'b')]
+    (1, 1), (1 , 14), (1,27), (1, 40),
+    (2, 2) , (2, 15) , (2,28), (2 , 41),
+    (3, 3) , (3, 16) , (3,29),(3 , 42),
+    (4, 4) , (4, 17) , (4,30), (4 , 43),
+    (5, 5) ,( 5, 18 ), (5,31), (5 , 44),
+    (6, 6) , (6, 19) , (6,32),( 6 , 45),
+    (7, 7) , (7, 20) ,( 7,33), (7 , 46),
+    (8, 8) ,(8, 21) ,( 8,34), (8 , 47),
+    (9, 9) , (9, 22) , (9,35), (9 , 48),
+    (10, 10) ,(10, 23), (10,36), (10 , 49),
+    (11, 11) ,(11,24) , (11,37), (11 ,50),
+    (12, 12) , (12, 25 ), (12,38), (12 , 51),
+    (13, 13) , (13, 26) , (13,40), (13 , 52)]
 
 temp = []
 temp1 = []
@@ -266,9 +266,9 @@ class playBasic(webapp2.RequestHandler):
             t = playmove(player1q, player2q, hold1, hold2, 1)
 
         if t == 11:
-            lost = "player1"
+            lost = "player2 wins"
         if t == 22:
-            lost = "player2"
+            lost = "player1 wins"
         deck1 = len(player1q)
         deck2 = len(player2q)
         holding1 = len(hold1)
@@ -293,17 +293,24 @@ class playShort(webapp2.RequestHandler):
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW.html')
-        t = playmove(player1q, player2q, hold1, hold2, 2)
+        t = playmove(player1q, player2q, hold1, hold2, 1)
     #    if t == 11:
     #        template = jinja_current_directory.get_template('///')
-    #    if t == 22:
-    #        template = jinja_current_directory.get_template('///')
+        lost = " "
+        if t == 'end':
+            if hold2 > hold1:
+                lost = "player1 wins"
+            if hold2 < hold1:
+                lost = "player2 wins"
+            if hold2 == hold1:
+                lost = "tie"
+
         deck1 = len(player1q)
         deck2 = len(player2q)
         holding1 = len(hold1)
         holding2 = len(hold2)
         test = myDictBasic
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test}
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost":lost}
         self.response.write(template.render(replaces))
 
 
@@ -316,5 +323,6 @@ app = webapp2.WSGIApplication([
     # The root route - to the Fortune Handler
     ('/', Main),
     ('/playBasic', playBasic),
+    ('/playShort', playShort),
     #('/farewell', GoodbyeHandler) #maps '/predict' to the FortuneHandler
 ], debug=True)

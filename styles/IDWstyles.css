@@ -24,6 +24,11 @@ input{
   color: white;
   font-size: 20px;
 }
+
+#CoolRules{
+  color: white;
+  font-size: 20px;
+}
 {
   transform: scale(2,2);
 }

@@ -4,9 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Cool Game</title>
+  <title>Shortened Game</title>
   <link rel="stylesheet" type="text/css" href="/styles/IDWstyles.css">
   </head>
-<body>
-    
-</body>
+  <style>
+    body {
+      background-image: url(/cards/Computer.png);
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: 100%,100%;
+    }
+  </style>
+  <body><center>
+        <h1>I Declare War!</h1>
+
+    <br><br>
+
+
+  <table>
+    <tr>
+      <th>
+        player1
+      </th>
+      <th>
+        player2
+      </th>
+    </tr>
+    <tr>
+          <td>
+            player 1 cards left :{{player1}}
+          </td>
+
+          <td>
+            player 2 cards left :{{player2}}
+          </td>
+    </tr>
+    <tr>
+        <td>
+          hold pile:{{player1hold}}
+        </td>
+        <td>
+          hold pile: {{player2hold}}
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+          Current move: {{p1move}}
+        </td>
+        <td>
+          Current move: {{p2move}}
+        </td>
+    </tr>
+</table><br>
+    {{lost}}<br><hr>
+      <form method="post">
+          <img id="top" class ="card" src={{img1}}  alt={{img1}} />
+        <button id="ShortMove" type="submit">Play Move</button>
+
+
+
+<img id="bottom" class = "card" src={{img2}} alt={{img2}} />
+<img id="holdp1" class = "card" src=/cards/face.png />
+<img id="holdp2" class = "card" src=/cards/face.png />
+
+</form> 
+
+
+
+      <hr><br>
+
+<br>
+{{show1}}
+{{show2}}
+test: {{test}}<br><br>

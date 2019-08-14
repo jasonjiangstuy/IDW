@@ -96,7 +96,7 @@ def setmoves(database):
 
     return player1q, player2q
 #run per move
-def playmove(player1q, player2q, hold1, hold2, game):
+def playmove(player1q, player2q, hold1, hold2, game, index):
     if game == 1:
         if len(player1q) < 1:
             if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
@@ -104,10 +104,10 @@ def playmove(player1q, player2q, hold1, hold2, game):
         if len(player2q) < 1:
             if bringin(player1q, player2q, hold1, hold2, 2, 3, game) == 22:
                 return(22)
-        play1 = player1q[0]
-        player1q.pop(0)
-        play2 = player2q[0]
-        player2q.pop(0)
+        play1 = player1q[index]
+        player1q.pop(index)
+        play2 = player2q[index]
+        player2q.pop(index)
 
         if play1 > play2:
             hold1.append(play1)
@@ -138,10 +138,10 @@ def playmove(player1q, player2q, hold1, hold2, game):
             return("stop")
         if len(player2q) < 1:
             return("stop")
-        play1 = player1q[0]
-        player1q.pop(0)
-        play2 = player2q[0]
-        player2q.pop(0)
+        play1 = player1q[index]
+        player1q.pop(index)
+        play2 = player2q[index]
+        player2q.pop(index)
 
         if play1 > play2:
             hold1.append(play1)
@@ -274,9 +274,9 @@ def war(player1q, player2q, hold1, hold2, stake, game):
             return
 
 #setting global var for the queues
+
+
 player1q, player2q = setmoves(myDictBasic)
-
-
 
 
 
@@ -289,6 +289,7 @@ jinja_current_directory = jinja2.Environment(
 
 class playBasic(webapp2.RequestHandler):
     def get(self):
+        
         template = jinja_current_directory.get_template('/templates/IDW.html')#play template
         self.response.write(template.render())
 
@@ -299,7 +300,7 @@ class playBasic(webapp2.RequestHandler):
         template = jinja_current_directory.get_template('/templates/IDW.html')
         lost = ""
         if lost == "":
-            t = playmove(player1q, player2q, hold1, hold2, 1)
+            t = playmove(player1q, player2q, hold1, hold2, 1, 0)
 
         if t == 11:
             lost = "player2 wins"
@@ -345,7 +346,7 @@ class playShort(webapp2.RequestHandler):
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW2.html')
-        t = playmove(player1q, player2q, hold1, hold2, 2)
+        t = playmove(player1q, player2q, hold1, hold2, 2, 0)
     #    if t == 11:
     #        template = jinja_current_directory.get_template('///')
 
@@ -407,10 +408,57 @@ class coolwar(webapp2.RequestHandler):
         lost = ""
         img1 = "/cards/0.jpeg"
         img2 = "/cards/0.jpeg"
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
-
+        show1 = player1q[0]
+        show2 = player1q[1]
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
         self.response.write(template.render())
     def post(self):
+        template = jinja_current_directory.get_template('/templates/IDW2.html')
+        t = playmove(player1q, player2q, hold1, hold2, 2, 0)
+    #    if t == 11:
+    #        template = jinja_current_directory.get_template('///')
+
+        lost = " "
+        if t == 'stop':
+            if hold2 > hold1:
+                lost = "player1 wins"
+        
+            if hold2 < hold1:
+                lost = "player2 wins"
+                
+                
+            if hold2 == hold1:
+                lost = "tie"
+            reset()
+            template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
+            deck1 = len(player1q)
+            deck2 = len(player2q)
+            holding1 = len(hold1)
+            holding2 = len(hold2)
+            test = myDictBasic
+            player1move = 'n/a'
+            player2move = 'n/a'
+
+            img1 = "/cards/0.jpeg"
+            img2 = "/cards/0.jpeg"
+            replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}               
+            self.response.write(template.render(replaces))
+#copy to simple --basic
+        else:
+            deck1 = len(player1q)
+            deck2 = len(player2q)
+            holding1 = len(hold1)
+            holding2 = len(hold2)
+            test = myDictBasic
+            player1move = moves[len(moves)-2]
+            player2move = moves[-1]
+
+            img1 = '/cards/'+str(player1move[1]) + '.png'
+            img2 = '/cards/'+str(player2move[1])+'.png'
+            replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
+            self.response.write(template.render(replaces))
+
+
 
         
 # Route mapping

@@ -20,3 +20,19 @@ h3 {
 td {
   margin: 10px;
 }
+
+.card{
+  position: relative;
+  height: 200px;
+  width: 100px;
+}
+
+#top{
+  top: 100px;
+  right: 50px;
+}
+
+#bottom{
+  bottom: 100px;
+  left: 50px;
+}

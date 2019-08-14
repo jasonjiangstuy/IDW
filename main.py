@@ -26,6 +26,7 @@ hold2 = []
 moves = []
 player1q = []
 player2q = []
+
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     if game == 1:
 
@@ -309,9 +310,23 @@ class Main(webapp2.RequestHandler):
         template = jinja_current_directory.get_template("/templates/mainpage.html") #ready template check path
         self.response.write(template.render())
 
+        
+
 class playShort(webapp2.RequestHandler):
     def get(self):
         template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
+        deck1 = len(player1q)
+        deck2 = len(player2q)
+        holding1 = len(hold1)
+        holding2 = len(hold2)
+        test = myDictBasic
+        player1move = 'n/a'
+        player2move = 'n/a'
+        lost = ""
+        img1 = "0.jpeg"
+        img2 = "0.jpeg"
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
+
         self.response.write(template.render())
 
     def post(self):
@@ -328,7 +343,7 @@ class playShort(webapp2.RequestHandler):
                 lost = "player2 wins"
             if hold2 == hold1:
                 lost = "tie"
-
+#copy to simple --basic
         deck1 = len(player1q)
         deck2 = len(player2q)
         holding1 = len(hold1)
@@ -336,8 +351,10 @@ class playShort(webapp2.RequestHandler):
         test = myDictBasic
         player1move = moves[len(moves)-2]
         player2move = moves[-1]
-#        img =
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0]}
+
+        img1 = '/cards/'+str(player1move[1]) + '.png'
+        img2 = '/cards/'+str(player2move[1])+'.png'
+        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
         self.response.write(template.render(replaces))
 
 

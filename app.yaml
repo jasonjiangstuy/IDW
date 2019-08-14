@@ -7,6 +7,9 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /cards
+  static_dir: cards
+  
 - url: /styles
   static_dir: styles
 

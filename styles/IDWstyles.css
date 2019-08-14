@@ -3,7 +3,9 @@ body {
   margin-left: 30%;
   margin-right: 30%;
 }
-
+form{
+  size: inherit;
+}
 h1 {
   color: white;
 }
@@ -29,9 +31,7 @@ input{
   color: white;
   font-size: 20px;
 }
-{
-  transform: scale(2,2);
-}
+
 td {
   margin: 10px;
 }
@@ -43,11 +43,31 @@ td {
 }
 
 #top{
-  bottom: 100px;
-  right: 500px;
+  top:20%;
+  right: 5%;
 }
 
 #bottom{
-  bottom: 100px;
-  left: 50px;
+  top: 20%;
+  left: 60%;
+}
+
+#holdp1{
+  right: 60%;
+  top: 20%
+}
+#holdp2{
+  left: 50%;
+  top: 20%;
+}
+
+#show{
+  top: 250px;
+  
+  margin: 0 auto;
+}
+#win{
+  position: relative;
+  font-size: 40px;
+  top: 40%
 }

@@ -9,7 +9,10 @@
   </head>
   <style>
     body {
-      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Stick_Figure.svg/1200px-Stick_Figure.svg.png")
+      background-image: url(/cards/Computer.png);
+      background-repeat: no-repeat;
+      background-position: right top;
+      background-size: 100%,100%;
     }
   </style>
   <body><center>
@@ -57,7 +60,7 @@
     {{lost}}<br><hr>
       <form method="post">
           <img id="top" class ="card" src={{img1}}  alt={{img1}} />
-        <input type="submit"></input>
+        <button id="ShortMove" type="submit">Play Move</button>
 
 
 
@@ -74,12 +77,3 @@
 <br>
 
           test: {{test}}<br><br>
-
-    {{moves}}
-</center>
-
-
-  </body>
-
-
-</html>

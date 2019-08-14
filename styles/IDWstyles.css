@@ -14,6 +14,7 @@ h3 {
 input{
   transform: scale(2,2);
 }
+
 #Rules {
   color: white;
   font-size: 20px;
@@ -23,7 +24,9 @@ input{
   color: white;
   font-size: 20px;
 }
-
+{
+  transform: scale(2,2);
+}
 td {
   margin: 10px;
 }

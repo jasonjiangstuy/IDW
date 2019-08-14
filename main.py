@@ -27,6 +27,20 @@ moves = []
 player1q = []
 player2q = []
 
+def reset():
+    for i in range(len(temp)):
+        temp.pop()
+    for i in range(len(temp1)):
+        temp1.pop()
+    for i in range(len(hold1)):
+        hold1.pop()
+    for i in range(len(hold2)):
+        hold2.pop()
+    for i in range(len(moves)):
+        moves.pop()
+
+    player1q, player2q = setmoves(myDictBasic)
+
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     if game == 1:
 
@@ -323,8 +337,8 @@ class playShort(webapp2.RequestHandler):
         player1move = 'n/a'
         player2move = 'n/a'
         lost = ""
-        img1 = "0.jpeg"
-        img2 = "0.jpeg"
+        img1 = "/cards/0.jpeg"
+        img2 = "/cards/0.jpeg"
         replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
 
         self.response.write(template.render())
@@ -339,23 +353,41 @@ class playShort(webapp2.RequestHandler):
         if t == 'stop':
             if hold2 > hold1:
                 lost = "player1 wins"
+        
             if hold2 < hold1:
                 lost = "player2 wins"
+                
+                
             if hold2 == hold1:
                 lost = "tie"
-#copy to simple --basic
-        deck1 = len(player1q)
-        deck2 = len(player2q)
-        holding1 = len(hold1)
-        holding2 = len(hold2)
-        test = myDictBasic
-        player1move = moves[len(moves)-2]
-        player2move = moves[-1]
+            reset()
+            template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
+            deck1 = len(player1q)
+            deck2 = len(player2q)
+            holding1 = len(hold1)
+            holding2 = len(hold2)
+            test = myDictBasic
+            player1move = 'n/a'
+            player2move = 'n/a'
 
-        img1 = '/cards/'+str(player1move[1]) + '.png'
-        img2 = '/cards/'+str(player2move[1])+'.png'
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
-        self.response.write(template.render(replaces))
+            img1 = "/cards/0.jpeg"
+            img2 = "/cards/0.jpeg"
+            replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}               
+            self.response.write(template.render(replaces))
+#copy to simple --basic
+        else:
+            deck1 = len(player1q)
+            deck2 = len(player2q)
+            holding1 = len(hold1)
+            holding2 = len(hold2)
+            test = myDictBasic
+            player1move = moves[len(moves)-2]
+            player2move = moves[-1]
+
+            img1 = '/cards/'+str(player1move[1]) + '.png'
+            img2 = '/cards/'+str(player2move[1])+'.png'
+            replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
+            self.response.write(template.render(replaces))
 
 
 

@@ -11,7 +11,9 @@ h1 {
 h3 {
   color: white;
 }
-
+input{
+  transform: scale(2,2);
+}
 #Rules {
   color: white;
   font-size: 20px;
@@ -28,11 +30,11 @@ td {
 }
 
 #top{
-  top: 100px;
-  right: 50px;
+  bottom: 100px;
+  right: 500px;
 }
 
 #bottom{
   bottom: 100px;
-  left: 50px;
+  left: 500px;
 }

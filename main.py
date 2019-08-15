@@ -425,7 +425,7 @@ class coolwar(webapp2.RequestHandler):
         
                 if hold2 < hold1:
                     lost = "computer wins"
-                
+                    
                 
                 if hold2 == hold1:
                     lost = "tie"

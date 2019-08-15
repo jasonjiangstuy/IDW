@@ -110,3 +110,6 @@ table{
 #b2{
 
 }
+.hide{
+  visibility: hidden;
+}

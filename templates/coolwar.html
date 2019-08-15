@@ -60,8 +60,9 @@
     <p id="win">{{lost}}</p>
     <br><hr>
       <form method="post">
-          <img id="top" class ="card" src={{img1}}  alt={{img1}} />
-        <button id="ShortMove" type="submit">Play Move</button>
+          
+        <img id="top" class ="card" src={{img1}}  alt={{img1}} />
+        <button id="ShortMove" type="submit">Start Game</button>
 
 
 
@@ -70,11 +71,12 @@
 <img id="holdp2" class = "card" src=/cards/face.png />
 <img id="show" class = "card" src={{show1}} alt={{show1}} />
 <img id="show" class = "card" src={{show2}} alt={{show2}} />
+<button id="b2" class = "button" name="b2" value="1">button2</button>
+<button id="b1" class= "button" name="b1" value="1">button1</button>
 
-<button id="b1" name="b1" value="1">button1</button>
- <button id="b2" name="b2" value="1">button2</button>
 </form> 
-
+<p id="lefttext" class ="text">{{player2hold}}</p>
+<p id="righttext" class = "text">{{player1hold}} </p>
 
 
       <hr><br>

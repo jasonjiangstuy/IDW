@@ -134,9 +134,9 @@ def playmove(player1q, player2q, hold1, hold2, game, index):
 
         else: raise NameError('Function: playmove broken')
     if game == 2:
-        if len(player1q) < 1:
+        if len(player1q) < index + 1:
             return("stop")
-        if len(player2q) < 1:
+        if len(player2q) < index +1:
             return("stop")
         play1 = player1q[index]
         player1q.pop(index)
@@ -424,7 +424,7 @@ class coolwar(webapp2.RequestHandler):
                     lost = "player1 wins"
         
                 if hold2 < hold1:
-                    lost = "player2 wins"
+                    lost = "computer wins"
                 
                 
                 if hold2 == hold1:

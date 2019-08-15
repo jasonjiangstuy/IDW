@@ -71,3 +71,35 @@ td {
   font-size: 40px;
   top: 40%
 }
+.button{
+  position: relative;
+  float: right;
+  margin: 20px;
+  right: 35px;
+}
+
+.text{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+  position: relative;
+}
+
+#lefttext{
+  right: 365px;
+  bottom: 150px;
+  color: greenyellow;
+  background-origin: padding-box;
+  
+}
+#righttext{
+  bottom: 210px;
+  left: 480px;
+  background-origin: padding-box;
+  color: crimson;
+  
+}
+table{
+  font-size: 25px;
+  background-color: antiquewhite;
+  border-collapse: collapse;
+}

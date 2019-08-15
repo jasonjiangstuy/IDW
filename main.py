@@ -50,8 +50,8 @@ def bringin(player1q, player2q,hold1 , hold2, player, need, game):
             else:
                 for i in hold1:
                     player1q.append(i)
-                    for i in range(len(hold1)):
-                        hold1.pop()
+                for i in range(len(hold1)):
+                    hold1.pop()
         elif player == 2:
             if len(hold2) < need:
                 return(22)

@@ -26,7 +26,7 @@ hold2 = []
 moves = []
 player1q = []
 player2q = []
-
+reset()
 def reset():
     for i in range(len(temp)):
         temp.pop()

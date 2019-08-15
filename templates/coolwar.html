@@ -23,10 +23,8 @@
     <center>
         <h1>I Declare War!</h1>
 
-    <br><br>
 
-    
-  <table>
+  <table id="table">
     <tr>
       <th>
         player1
@@ -62,39 +60,65 @@
         </td>
     </tr>
 </table>
-<br>
-<h1> VS</h1>
+
+
+
+<button class="hide" id="ShortMove" type="submit">Start Game</button>
+
+
+
+<h1>{{player1hold}} to {{player2hold}}</h1>
+
+<p class = "text">VS</p>
+
+
+
+
+
 
     <p id="win">{{lost}}</p>
     <br><hr>
+
+  <div class= "center">
+    <div class="main">
       <form method="post">
           
         <img id="top" class ="card" src={{img1}}  alt={{img1}}>
-        <button class="hide" id="ShortMove" type="submit">Start Game</button>
-
-
         <img id="bottom" class = "card" src={{img2}} alt={{img2}} />
-          <img id="holdp1" class = "card" src=/cards/face.png />
-            <img id="holdp2" class = "card" src=/cards/face.png />
+        <br>
+        <img id="holdp1" class = "card" src=/cards/face.png />
+        <img id="holdp2" class = "card" src=/cards/face.png />
 
-            <img id="show" class = "card" src={{show1}} alt={{show1}} />
-            <img id="show" class = "card" src={{show2}} alt={{show2}} />
+        <hr>
+        <table><tr><td>
+        <img id="show" class = "card" src={{show1}} alt={{show1}} /></td><td>
+        <img id="show1" class = "card" src={{show2}} alt={{show2}} /></td>
+        </tr>
+        <tr><td><button id="b1" class= "button" name="b1" value="1">button1</button>
+        </td><td><button id="b2" class = "button" name="b2" value="1">button2</button>
+        </td>
+      </tr>
+      </table>
+      </form> 
 
-              <button id="b2" class = "button" name="b2" value="1">button2</button>
-              <button id="b1" class= "button" name="b1" value="1">button1</button>
-
-</form> 
 
 
-<p id="lefttext" class ="text">{{player1hold}}</p>
-<p id="righttext" class = "text">{{player2hold}} </p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
 </center>
 </body>
 </html>
-      <hr><br>
+      
 
-<br>
-<br><br>
-</center>
+
   </body>
 </html>

@@ -32,40 +32,14 @@ input{
   font-size: 20px;
 }
 
-td {
-  margin: 10px;
-}
 
 .card{
-  
+  position: relative;
   height: 200px;
   width: 100px;
 }
 
-#top{
-  top:20%;
-  right: 5%;
-}
 
-#bottom{
-  top: 20%;
-  left: 60%;
-}
-
-#holdp1{
-  right: 60%;
-  top: 20%
-}
-#holdp2{
-  left: 50%;
-  top: 20%;
-}
-
-#show{
-  top: 250px;
-  
-  margin: 0 auto;
-}
 #win{
   position: relative;
   font-size: 40px;
@@ -74,8 +48,8 @@ td {
 .button{
   position: relative;
   float: right;
-  margin: 20px;
-  right: 35px;
+  margin: 5%;
+  right: 15%;
 }
 
 .text{
@@ -85,31 +59,47 @@ td {
 }
 
 #lefttext{
-  right: 365px;
-  bottom: 150px;
+
   color: greenyellow;
   background-origin: padding-box;
-  
+  position: absolute;
 }
 #righttext{
-  bottom: 210px;
-  left: 480px;
+  position: absolute;
   background-origin: padding-box;
   color: crimson;
   
 }
-table{
+#table{
   font-size: 25px;
   background-color: antiquewhite;
   border-collapse: collapse;
 }
 
-#b1{
-  position: 
-}
-#b2{
-
-}
 .hide{
   visibility: hidden;
+}
+.center{
+  text-align: center;
+  width: inherit;
+  height: inherit;
+}
+.main{
+  width: inherit;
+  height: inherit;
+}
+
+#top{
+  right: 30%;
+}
+
+#bottom{
+  left: 30%;
+}
+
+#holdp1{
+  right: 30%;
+}
+#holdp2{
+  left: 30%;
 }

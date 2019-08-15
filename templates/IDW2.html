@@ -8,20 +8,23 @@
   <link rel="stylesheet" type="text/css" href="/styles/IDWstyles.css">
   </head>
   <style>
-    body {
-      background-image: url(/cards/Computer.png);
-      background-repeat: no-repeat;
-      background-position: right top;
-      background-size: 100%,100%;
+    body{
+      background-color: gray;
     }
+    html { 
+  background: url(/cards/Computer.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
   </style>
-  <body><center>
+  <body>
+    <center>
         <h1>I Declare War!</h1>
 
-    <br><br>
 
-
-  <table>
+  <table id="table">
     <tr>
       <th>
         player1
@@ -56,25 +59,58 @@
           Current move: {{p2move}}
         </td>
     </tr>
-</table><br>
-<p id="win">{{lost}}</p><br><hr>
+</table>
+
+
+
+
+
+
+
+<h1>{{player1hold}} to {{player2hold}}</h1>
+
+<p class = "text">VS</p>
+
+
+{{test}}
+
+
+
+    <p id="win">{{lost}}</p>
+    <br><hr>
+
+  <div class= "center">
+    <div class="main">
       <form method="post">
-          <img id="top" class ="card" src={{img1}}  alt={{img1}} />
-        <button id="ShortMove" type="submit">Play Move</button>
+          
+        <img id="top" class ="card" src={{img1}}  alt={{img1}}>
+        <img id="bottom" class = "card" src={{img2}} alt={{img2}} />
+        <br>
+        <img id="holdp1" class = "card" src=/cards/face.png />
+        <img id="holdp2" class = "card" src=/cards/face.png />
+
+        <hr>
+        <button id="ShortMove" type="submit">Start Game</button>
+      </form> 
 
 
 
-<img id="bottom" class = "card" src={{img2}} alt={{img2}} />
-<img id="holdp1" class = "card" src=/cards/face.png />
-<img id="holdp2" class = "card" src=/cards/face.png />
-
-</form> 
-<p id="lefttext" class ="text">{{player2hold}}</p>
-<p id="righttext" class = "text">{{player1hold}} </p>
+</div>
+</div>
 
 
-      <hr><br>
 
-<br>
 
-        <br><br>
+
+
+
+
+
+</center>
+</body>
+</html>
+      
+
+
+  </body>
+</html>

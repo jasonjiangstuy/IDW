@@ -62,25 +62,25 @@ def bringin(player1q, player2q,hold1 , hold2, player, need, game):
                     hold2.pop()
         else: raise NameError('in BringIn: player var is wrong')
 
-        if game == 2:
+    if game == 2:
 
-            if player == 1:
-                if len(hold1) < need:
-                    return('stop')
-                else:
-                    for i in hold1:
-                        player1q.append(i)
-                        for i in range(len(hold1)):
-                            hold1.pop()
-            elif player == 2:
-                if len(hold2) < need:
-                    return('stop')
-                else:
-                    for i in hold2:
-                        player2q.append(i)
-                    for i in range(len(hold2)):
-                        hold2.pop()
-            else: raise NameError('in BringIn: player var is wrong')
+        if player == 1:
+            if len(hold1) < need:
+                return('stop')
+            else:
+                for i in hold1:
+                    player1q.append(i)
+                    for i in range(len(hold1)):
+                        hold1.pop()
+        elif player == 2:
+            if len(hold2) < need:
+                return('stop')
+            else:
+                for i in hold2:
+                    player2q.append(i)
+                for i in range(len(hold2)):
+                    hold2.pop()
+        else: raise NameError('in BringIn: player var is wrong')
 
 def setmoves(database):
     p =0
@@ -290,14 +290,14 @@ jinja_current_directory = jinja2.Environment(
 class playBasic(webapp2.RequestHandler):
     def get(self):
         
-        template = jinja_current_directory.get_template('/templates/IDW.html')#play template
+        template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
         self.response.write(template.render())
 
 
 
 
     def post(self):
-        template = jinja_current_directory.get_template('/templates/IDW.html')
+        template = jinja_current_directory.get_template('/templates/IDW2.html')
         lost = ""
         if lost == "":
             t = playmove(player1q, player2q, hold1, hold2, 1, 0)
@@ -313,8 +313,9 @@ class playBasic(webapp2.RequestHandler):
         test = myDictBasic
         player1move = moves[len(moves)-2]
         player2move = moves[-1]
-
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0]}
+        img1 = '/cards/'+str(player1move[1]) + '.png'
+        img2 = '/cards/'+str(player2move[1])+'.png'
+        replaces={"test":test,"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
         self.response.write(template.render(replaces))
 
 

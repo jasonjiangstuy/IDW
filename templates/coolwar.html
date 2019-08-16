@@ -19,13 +19,19 @@
 }
   </style>
   <script>
-  document.getElementsByClassName("human").addEventListener("click", human);
-  
+  function load(){
+    let x = document.getElementsByClassName('human');
+    if x.length == 2:
+      human();
+    let y = document.getElementsByClassName("robot");
+    if y.length == 2:
+      robot()
+  }
   function human() {
-    var eleh = document.getElementById("top");
-    var eler = document.getElementById("bottom")
-    var pos = 30;
-    var id = setInterval(frameh, 5)
+    let eleh = document.getElementById("top");
+    let eler = document.getElementById("bottom")
+    let pos = 30;
+    let id = setInterval(frameh(), 5)
     document.getElementById("test").innerHTML ='working';
     function frameh() {
       if (pos <= 0){
@@ -38,16 +44,31 @@
       }
     }
   }
+
   
-  document.getElementsByClassName("robot").addEventListener("click", robot)
-
+  function robot() {
+    let eleh = document.getElementById("top");
+    let eler = document.getElementById("bottom")
+    let pos = 30;
+    let id = setInterval(framer(), 5)
+    document.getElementById("test").innerHTML ='working';
+    function framer() {
+      if (pos <= 0){
+        clearInterval(id)
+      }
+      else{
+        pos--;
+        eleh.style.right = pos + "%"
+        eler.style.left = pos + "%"
+      }
+    }
   }
-
+</script>
 <div id = "test"></div>
   
   
   
-  </script>
+  
   <body class={{animates}}>
     <center>
         <h1>I Declare War!</h1>
@@ -110,8 +131,8 @@
     <div class="main">
       <form method="post"> 
         
-        <img id="top" class = {{won}} "card" src={{img1}}  alt={{img1}}>
-        <img id="bottom" class = {{won}} "card" src={{img2}} alt={{img2}} />
+        <img id="top" class = "{{won}}" onload="load()" src={{img1}}  alt={{img1}}>
+        <img id="bottom" class = "{{won}}" onload="load()" src={{img2}} alt={{img2}} />
         <br>
         <img id="holdp1" class = "card" src=/cards/face.png />
         <img id="holdp2" class = "card" src=/cards/face.png />

@@ -103,10 +103,16 @@ td{
 
 #top{
   right: 30%;
+  position: relative;
+  height: 200px;
+  width: 100px;
 }
 
 #bottom{
   left: 30%;
+  position: relative;
+  height: 200px;
+  width: 100px;
 }
 
 #holdp1{

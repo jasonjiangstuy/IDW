@@ -83,7 +83,7 @@ def setmoves(database):
 
     return player1q, player2q
 
-won =""
+won ="human"
 #run per move
 def playmove(player1q, player2q, hold1, hold2, game, index):
     
@@ -515,7 +515,7 @@ class coolwar(webapp2.RequestHandler):
                     show2 = '/cards/'+str(player1q[1][1])+'.png'
                 img1 = '/cards/'+str(player1move[1]) + '.png'
                 img2 = '/cards/'+str(player2move[1])+'.png'
-                print(won)
+                print("won:",won)
                 replaces={'won': won,"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
                 self.response.write(template.render(replaces))
 

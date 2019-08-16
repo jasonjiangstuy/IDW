@@ -41,6 +41,12 @@ input{
   font-size: 20px;
 }
 
+.GameButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-between;
+}
 
 .card{
   position: relative;

@@ -7,7 +7,14 @@
   <title>I Declare War</title>
   <link rel="stylesheet" type="text/css" href="/styles/IDWstyles.css">
   </head>
-  <body><center>
+  <body>
+    <style>
+      body {
+        background-image: url(cards/cardbackground.jpg)
+      }
+    </style>
+    <center>
+      <div class="HowToPlay"></div>
     <div>
     <h1>WAR! (the card game)</h1>
     </div>
@@ -16,10 +23,12 @@
     <ol id="Rules">
       <li>A deck of cards has been split between you and a CPU player.</li>
         <li>Each player will play a card. The highest card WINS.</li>
-        <li>If the players tie, the each player puts down 3 cards. The player with the highest card WINS. (Keep doing this until the tie is broken) </li>
-        <li>The game is over when one player has no more cards.</li>
+        <li>If the players tie, the each player puts down 3 cards. The player with the highest card WINS. (Keep doing this until the tie is broken). This is known as WAR.</li>
+        <li>When a players deck reaches 0, their hold pile becomes their new deck.</li>
+        <li>The game is over when one player has 0 cards both in their hold pile and deck OR when WAR occurs and a player cannot finish.</li>
     </ol>
   </div>
+  <br><hr>
   <div>
   <h3>How To Play (Card Roulette)</h3>
 </div>
@@ -31,14 +40,19 @@
       <li>After going through the entire deck, the player with the most cards, WINS.</li> 
     </ol>
   </div>
+  <br><hr>
   <div>
     <h3>How To Play (Cool Version)</h3>
   </div>
   
   <div>
     <ol id="CoolRules">
+      <li>Start the Game by clicking a card.+</li>
       <li>Like the first 2 variations, a deck of cards has been shuffled and split in half between you and a CPU player</li>
       <li>You will be shown the first 2 cards.</li>
+      <li>You can choose from the 2 cards which card you want to send out. The CPU will do the same.</li>
+      <li>The player with the highest card WINS!</li>
+      <li>The cards will go into the winning players hold pile.</li>
     </ol>
   </div>
   <div>
@@ -55,6 +69,7 @@
   <a href="/playCool">
     <button id="CoolButton" type="button">Start Game (Cool Game)</button>
   </a>
-</div></center>
+</div>
+</center>
   </body>
 </html>

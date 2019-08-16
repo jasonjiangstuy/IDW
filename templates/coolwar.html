@@ -21,26 +21,27 @@
   <script>
   function load(){
     let x = document.getElementsByClassName('human');
-    if x.length == 2:
+    if (x.length == 2){
       human();
-    let y = document.getElementsByClassName("robot");
-    if y.length == 2:
-      robot()
+    }
+    /*let y = document.getElementsByClassName("robot");
+    if (y.length == 2){
+      robot()}*/
   }
   function human() {
+
     let eleh = document.getElementById("top");
-    let eler = document.getElementById("bottom")
-    let pos = 30;
-    let id = setInterval(frameh(), 5)
-    document.getElementById("test").innerHTML ='working';
+    let eler = document.getElementById("bottom");
+    let pos = 0; 
+    let id = setInterval(frameh(), 5);
     function frameh() {
-      if (pos <= 0){
-        clearInterval(id)
+      if (pos == 90){
+        clearInterval(id);  
       }
       else{
-        pos--;
-        eleh.style.right = pos + "%"
-        eler.style.left = pos + "%"
+        pos = pos + 1;
+        eleh.style.right =(30 - pos) + "%";
+        eler.style.left = (30 - pos) + "%";
       }
     }
   }
@@ -51,7 +52,7 @@
     let eler = document.getElementById("bottom")
     let pos = 30;
     let id = setInterval(framer(), 5)
-    document.getElementById("test").innerHTML ='working';
+
     function framer() {
       if (pos <= 0){
         clearInterval(id)

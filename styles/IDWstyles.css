@@ -2,6 +2,11 @@ body {
   background-color: green;
   margin-left: 30%;
   margin-right: 30%;
+  height: 100%;
+
+}
+html{
+  height: 100%;
 }
 form{
   size: inherit;
@@ -73,9 +78,16 @@ input{
 #table{
   font-size: 25px;
   background-color: antiquewhite;
-  border-collapse: collapse;
+  width: 100%;
+  border: 0.5% solid black;
+  text-align: center;
+  
+  
 }
 
+td{
+  padding: 0.5%;
+}
 .hide{
   visibility: hidden;
 }

@@ -341,7 +341,7 @@ class playShort(webapp2.RequestHandler):
         img2 = "/cards/0.jpeg"
         replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
 
-        self.response.write(template.render())
+        self.response.write(template.render(replaces))
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW2.html')

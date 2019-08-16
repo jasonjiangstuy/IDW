@@ -103,3 +103,47 @@ input{
 #holdp2{
   left: 30%;
 }
+
+@keyframes fadeIn {
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+.animate{
+    animation-duration:4s;
+    animation-name: fadeIn;
+}
+
+@keyframes clashh{
+    0%{
+        right:0%;
+        left:0%;
+    }
+    100%{
+        top:50%;
+        right:30%;
+    }
+}
+
+.human {
+    animation-duration:3s;
+    animation-name:clashh;
+}
+@keyframes clashr{
+    0%{
+        right:0%;
+        left:0%;
+    }
+    100%{
+        top:50%;
+        left:30%;
+    }
+}
+
+.robot {
+    animation-duration:3s;
+    animation-name:clashr;
+}

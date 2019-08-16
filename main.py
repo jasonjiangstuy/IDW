@@ -27,19 +27,6 @@ moves = []
 player1q = []
 player2q = []
 
-def reset():
-    for i in range(len(temp)):
-        temp.pop()
-    for i in range(len(temp1)):
-        temp1.pop()
-    for i in range(len(hold1)):
-        hold1.pop()
-    for i in range(len(hold2)):
-        hold2.pop()
-    for i in range(len(moves)):
-        moves.pop()
-
-    player1q, player2q = setmoves(myDictBasic)
 
 def bringin(player1q, player2q,hold1 , hold2, player, need, game):
     if game == 1:
@@ -95,8 +82,11 @@ def setmoves(database):
         p +=1
 
     return player1q, player2q
+
+won =""
 #run per move
 def playmove(player1q, player2q, hold1, hold2, game, index):
+    
     if game == 1:
         if len(player1q) < 1:
             if bringin(player1q, player2q, hold1, hold2, 1, 3, game) == 11:
@@ -114,12 +104,14 @@ def playmove(player1q, player2q, hold1, hold2, game, index):
             hold1.append(play2)
             moves.append((play1))
             moves.append((play2))
+            won = "human"
             return
         elif play2 > play1:
             hold2.append(play1)
             hold2.append(play2)
             moves.append((play1))
             moves.append((play2))
+            won = "robot"
             return
 
         elif play2 == play1:
@@ -148,12 +140,14 @@ def playmove(player1q, player2q, hold1, hold2, game, index):
             hold1.append(play2)
             moves.append((play1))
             moves.append((play2))
+            won = "human"
             return
         elif play2 > play1:
             hold2.append(play1)
             hold2.append(play2)
             moves.append((play1))
             moves.append((play2))
+            won = "robot"
             return
 
         elif play2 == play1:
@@ -180,11 +174,11 @@ def war(player1q, player2q, hold1, hold2, stake, game):
         war1 = (player1q[0], player1q[1], player1q[2][0])
         war2 = (player2q[0], player2q[1], player2q[2][0])
         player1q.pop(0)
-        player1q.pop(1)
-        player1q.pop(2)
+        player1q.pop(0)
+        player1q.pop(0)
         player2q.pop(0)
-        player2q.pop(1)
-        player2q.pop(2)
+        player2q.pop(0)
+        player2q.pop(0)
 
         if war1[-1] > war2[-1]:
             for i in war1:
@@ -196,6 +190,7 @@ def war(player1q, player2q, hold1, hold2, stake, game):
                 temp1.append(i)
             for i in stake:
                 hold1.append(i)
+            won = "human"
             return
 
         if war2[-1] > war1[-1]:
@@ -207,6 +202,7 @@ def war(player1q, player2q, hold1, hold2, stake, game):
                 temp1.append(i)
             for i in stake:
                 hold2.append(i)
+            won = "robot"
             return
         if war2[-1] == war1[-1]:
 
@@ -273,11 +269,21 @@ def war(player1q, player2q, hold1, hold2, stake, game):
             war(player1q, player2q, hold1, hold2, stake, game)
             return
 
-#setting global var for the queues
 
+def reset():
+    for i in range(len(temp)):
+        temp.pop()
+    for i in range(len(temp1)):
+        temp1.pop()
+    for i in range(len(hold1)):
+        hold1.pop()
+    for i in range(len(hold2)):
+        hold2.pop()
+    for i in range(len(moves)):
+        moves.pop()
 
-player1q, player2q = setmoves(myDictBasic)
-
+    player1q, player2q = setmoves(myDictBasic)
+reset()
 
 
 # Remember, you can get this by searching for jinja2 google app engine
@@ -291,7 +297,11 @@ class playBasic(webapp2.RequestHandler):
     def get(self):
         
         template = jinja_current_directory.get_template('/templates/IDW2.html')#play template
-        self.response.write(template.render())
+        img1 = "/cards/0.jpeg"
+        img2 = "/cards/0.jpeg"
+        replace = {"animates":"animate", "img1":img1, "img2":img2}
+
+        self.response.write(template.render(replace))
 
 
 
@@ -341,15 +351,13 @@ class playShort(webapp2.RequestHandler):
         lost = ""
         img1 = "/cards/0.jpeg"
         img2 = "/cards/0.jpeg"
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
+        replaces={"animates":"animate", "moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}
 
-        self.response.write(template.render())
+        self.response.write(template.render(replaces))
 
     def post(self):
         template = jinja_current_directory.get_template('/templates/IDW2.html')
         t = playmove(player1q, player2q, hold1, hold2, 2, 0)
-    #    if t == 11:
-    #        template = jinja_current_directory.get_template('///')
 
         lost = " "
         if t == 'stop':
@@ -376,7 +384,6 @@ class playShort(webapp2.RequestHandler):
             img2 = "/cards/0.jpeg"
             replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2}               
             self.response.write(template.render(replaces))
-#copy to simple --basic
         else:
             deck1 = len(player1q)
             deck2 = len(player2q)
@@ -411,8 +418,8 @@ class coolwar(webapp2.RequestHandler):
         img2 = "/cards/0.jpeg"
         show1 = "/cards/0.jpeg"
         show2 = "/cards/0.jpeg"
-        replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
-        self.response.write(template.render())
+        replaces={"animates":"animate","moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
+        self.response.write(template.render(replaces))
     def post(self):
         template = jinja_current_directory.get_template('/templates/coolwar.html')
         b1 = self.request.get('b1')
@@ -461,7 +468,7 @@ class coolwar(webapp2.RequestHandler):
                     show2 = '/cards/'+str(player1q[1][1])+'.png'
                 img1 = '/cards/'+str(player1move[1]) + '.png'
                 img2 = '/cards/'+str(player2move[1])+'.png'
-                replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
+                replaces={"won":won,"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
                 self.response.write(template.render(replaces))
 
         if b2 == "1":
@@ -508,7 +515,8 @@ class coolwar(webapp2.RequestHandler):
                     show2 = '/cards/'+str(player1q[1][1])+'.png'
                 img1 = '/cards/'+str(player1move[1]) + '.png'
                 img2 = '/cards/'+str(player2move[1])+'.png'
-                replaces={"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
+                print(won)
+                replaces={'won': won,"moves": moves, "player1":deck1, "player2":deck2, "player1hold":holding1, "player2hold":holding2, "test":test, "lost": lost, "p1move":player1move[0], "p2move":player2move[0], "img1":img1, "img2":img2, "show1" : show1, "show2":show2}
                 self.response.write(template.render(replaces))
 
 
